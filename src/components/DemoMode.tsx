@@ -1,19 +1,20 @@
 import { useState, useEffect } from 'react';
 import '../App.css';
 import GoogleLoginCheck from './GoogleLoginCheck';
-import Captcha from './Captcha';
-import Header from './Header';
-import SearchBar from './SearchBar';
-import Hero from './Hero';
-import BrandsSection from './BrandsSection';
-import Footer from './Footer';
-import { markHumanVerified } from '../utils/botDetection';
+import MainLayout from './MainLayout';
+import { useAppLogic } from '../hooks/useAppLogic';
 
 function DemoMode() {
-    const [isLoading, setIsLoading] = useState(true);
+    const {
+        isLoading,
+        shouldShowCaptchaOverlay,
+        handleLoginStatusChange: originalHandleLoginStatusChange,
+        handleCaptchaVerified,
+        handleRequireCaptcha: originalHandleRequireCaptcha,
+    } = useAppLogic({ loadingDelay: 2500 });
+
     const [checkProgress, setCheckProgress] = useState(0);
     const [animationComplete, setAnimationComplete] = useState(false);
-    const [captchaTriggeredBySearch, setCaptchaTriggeredBySearch] = useState(false);
 
     // Update check progress while loading
     useEffect(() => {
@@ -37,12 +38,12 @@ function DemoMode() {
                     if (currentStage === stages.length) {
                         setTimeout(() => {
                             setAnimationComplete(true);
-                        }, 600);
+                        }, 300);
                     }
                 } else {
                     clearInterval(progressInterval);
                 }
-            }, 600); // Delay between steps
+            }, 400); // Delay between steps
 
             return () => clearInterval(progressInterval);
         }, 100); // Initial delay before starting
@@ -50,36 +51,18 @@ function DemoMode() {
         return () => clearTimeout(initialDelay);
     }, [isLoading]);
 
+    // Wrapper for login status change to potentially include demo-specific logic if needed
     const handleLoginStatusChange = (status: boolean) => {
-        // Allow time for animation to complete
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 3500);
-
-        // If logged in to Google, mark as human
-        if (status) {
-            markHumanVerified();
-        }
+        // Call the original handler from the hook (which includes the delay)
+        originalHandleLoginStatusChange(status);
+        // Add any DemoMode specific logic here if required in the future
     };
 
-    const handleCaptchaVerified = () => {
-        setCaptchaTriggeredBySearch(false); // Reset search trigger
-
-        // Mark as human after successful CAPTCHA
-        // We should mark as human here, assuming CAPTCHA pass means human
-        markHumanVerified();
-
-        // Optionally: Reset bot detection state if desired after CAPTCHA pass
-        // resetBotDetection();
-    };
-
+    // Wrapper for require captcha to add demo-specific logging
     const handleRequireCaptcha = () => {
         console.log('Captcha required by SearchBar in Demo Mode');
-        setCaptchaTriggeredBySearch(true);
+        originalHandleRequireCaptcha(); // Call the original handler from the hook
     };
-
-    // Determine if CAPTCHA overlay should be shown - ONLY when triggered by search
-    const shouldShowCaptchaOverlay = captchaTriggeredBySearch;
 
     // Helper to determine active animation step
     const isActiveStep = (step: number): boolean => {
@@ -98,24 +81,15 @@ function DemoMode() {
     };
 
     return (
-        <div className="App">
+        <MainLayout
+            isLoading={isLoading}
+            shouldShowCaptchaOverlay={shouldShowCaptchaOverlay}
+            isDemoModeEnabled={true}
+            onRequireCaptcha={handleRequireCaptcha}
+            onCaptchaVerified={handleCaptchaVerified}
+        >
             {/* Hidden Google login check component */}
             <GoogleLoginCheck onLoginStatusChange={handleLoginStatusChange} />
-
-            {/* Show captcha only if bot activity is detected or explicitly shown */}
-            {shouldShowCaptchaOverlay && (
-                <div className="captcha-overlay">
-                    <div className="captcha-container">
-                        <div className="ihg-captcha-header">
-                            <div className="ihg-logo">
-                                <span className="ihg-text">IHG</span>
-                                <span className="hotels-text">Hotels & Resorts</span>
-                            </div>
-                        </div>
-                        <Captcha onCaptchaVerified={handleCaptchaVerified} />
-                    </div>
-                </div>
-            )}
 
             {/* Loading state - only in demo mode */}
             {isLoading && (
@@ -159,16 +133,7 @@ function DemoMode() {
                     </div>
                 </div>
             )}
-
-            {/* Main content - visible based on authentication status */}
-            <div className={`main-content`}>
-                <Header />
-                <SearchBar isDemoModeEnabled={true} onRequireCaptcha={handleRequireCaptcha} />
-                <Hero />
-                <BrandsSection />
-                <Footer />
-            </div>
-        </div>
+        </MainLayout>
     );
 }
 
