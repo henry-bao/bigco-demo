@@ -107,7 +107,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ isDemoModeEnabled = false, onRequ
 
                 {/* Include honeytrap elements */}
                 {getUserTrustLevel() !== TrustLevel.HUMAN && (
-                    <HoneytrapElements className="search-form-honeytrap" isDemoMode={true} />
+                    <HoneytrapElements className={isDemoModeEnabled ? 'search-form-honeytrap' : 'hidden'} isDemoMode={true} />
                 )}
 
                 <form className="search-form" onSubmit={handleSubmit}>
