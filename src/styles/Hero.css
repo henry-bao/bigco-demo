@@ -1,0 +1,351 @@
+.hero-section {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-image-replacement {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2d3941, #4a6572);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-image-replacement:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.hero-overlay {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.15);
+}
+
+.hero-overlay i {
+    font-size: 100px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.hero-overlay span {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-promo {
+    background-color: rgba(45, 57, 65, 0.85);
+    padding: 45px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    color: white;
+    max-width: 900px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.card-promo:hover {
+    transform: translateY(-5px);
+}
+
+.card-image {
+    flex: 0 0 300px;
+    margin-right: 50px;
+}
+
+.credit-card-mockup {
+    background: linear-gradient(135deg, #1a2a36, #37474f);
+    border-radius: 16px;
+    padding: 25px 24px 25px;
+    width: 100%;
+    aspect-ratio: 1.6/1;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    overflow: hidden;
+}
+
+.credit-card-mockup:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 60%);
+    z-index: 1;
+}
+
+.credit-card-mockup:after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.1) 40%,
+        rgba(255, 255, 255, 0) 60%
+    );
+    transform: rotate(45deg);
+    z-index: 2;
+    animation: shimmer 8s infinite linear;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.credit-card-mockup:hover {
+    transform: translateY(-10px) rotate(5deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.credit-card-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card-chip {
+    width: 45px;
+    height: 35px;
+    background: linear-gradient(45deg, #d4af37, #f2d15e);
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.card-chip:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-chip:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-brand {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.card-brand i {
+    font-size: 22px;
+    margin-right: 6px;
+    color: #e83a3a;
+}
+
+.card-brand span {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.card-middle {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.card-number {
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card-holder {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.card-name {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+}
+
+.expiry-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    text-align: right;
+}
+
+.expiry-date {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 600;
+    text-align: right;
+}
+
+.card-info {
+    flex: 1;
+}
+
+.card-headline {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.small-text {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 8px;
+}
+
+.large-text {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.bonus-points {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.points-number {
+    font-size: 70px;
+    font-weight: 700;
+    line-height: 1;
+    color: #e83a3a;
+    text-shadow: 0 3px 10px rgba(232, 58, 58, 0.3);
+}
+
+.points-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e0e0e0;
+}
+
+.bonus-details {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.learn-more-btn {
+    background-color: #e83a3a;
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(232, 58, 58, 0.3);
+}
+
+.learn-more-btn:hover {
+    background-color: #d32f2f;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(232, 58, 58, 0.4);
+}
+
+.learn-more-btn:active {
+    transform: translateY(0);
+}
+
+/* Icon */
+.icon-hotel:before {
+    content: '\f594';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-credit-card:before {
+    content: '\f09d';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-arrow-right:before {
+    content: '\f061';
+    font-family: 'Font Awesome 5 Free';
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <img
+            onload="show_login_status('Google', true)"
+            onerror="show_login_status('Google', false)"
+            src="https://accounts.google.com/CheckCookie?continue=https%3A%2F%2Fwww.google.com%2Fintl%2Fen%2Fimages%2Flogos%2Faccounts_logo.png&followup=https%3A%2F%2Fwww.google.com%2Fintl%2Fen%2Fimages%2Flogos%2Faccounts_logo.png&chtml=LoginDoneHtml&checkedDomains=youtube&checkConnection=youtube%3A291%3A1"
+        />
+
+        <div class="status"></div>
+        <script type="text/javascript">
+            const statusDiv = document.querySelector('.status');
+            function show_login_status(network, status) {
+                const statusText = document.createElement('p');
+                if (status) {
+                    statusText.innerText = `You are logged in to ${network}.\n`;
+                    statusText.style.color = 'green';
+                    statusDiv.appendChild(statusText);
+                } else {
+                    statusText.innerText = `You are not logged in to ${network}.\n`;
+                    statusText.style.color = 'red';
+                    statusDiv.appendChild(statusText);
+                }
+            }
+        </script>
+    </body>
+</html>

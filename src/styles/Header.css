@@ -1,0 +1,213 @@
+.ihg-header {
+    width: 100%;
+    font-family: 'Roboto', Arial, sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.top-nav {
+    background-color: #1d242a;
+    color: white;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.top-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.top-nav-left,
+.top-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.top-nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.top-nav-link:hover {
+    color: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+.join-btn {
+    background-color: #e83a3a;
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.join-btn:hover {
+    background-color: #c53030;
+    transform: translateY(-1px);
+}
+
+.main-nav {
+    background-color: white;
+    padding: 18px 0;
+}
+
+.main-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.logo a:hover,
+.logo a:focus,
+.logo a:active,
+.logo a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+.ihg-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+}
+
+.ihg-logo a,
+.ihg-logo a:hover,
+.ihg-logo a:focus,
+.ihg-logo a:visited {
+    text-decoration: none;
+}
+
+.ihg-text {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e83a3a;
+    letter-spacing: 1px;
+    transition: transform 0.2s ease;
+    text-decoration: none;
+    line-height: 1;
+    border-bottom: none;
+}
+
+.hotels-text {
+    font-size: 14px;
+    color: #333;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.logo img {
+    height: 30px;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 32px;
+}
+
+.nav-item {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+}
+
+.nav-item:after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #e83a3a;
+    transition: width 0.2s ease;
+}
+
+.nav-item:hover {
+    color: #e83a3a;
+}
+
+.nav-item:hover:after {
+    width: 100%;
+}
+
+/* Icons */
+[class^='icon-'] {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-style: normal;
+}
+
+.icon-phone:before {
+    content: '\f095';
+}
+
+.icon-globe:before {
+    content: '\f0ac';
+}
+
+.icon-currency:before {
+    content: '\f155';
+}
+
+.icon-user:before {
+    content: '\f007';
+}
+
+.icon-member:before {
+    content: '\f234';
+}
+
+.icon-book:before {
+    content: '\f02d';
+}
+
+.icon-manage:before {
+    content: '\f073';
+}
+
+.icon-hotels:before {
+    content: '\f1ad';
+}
+
+.icon-offers:before {
+    content: '\f06b';
+}
+
+.icon-about:before {
+    content: '\f05a';
+}
+
+.icon-rewards:before {
+    content: '\f005';
+}

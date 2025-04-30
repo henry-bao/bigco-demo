@@ -1,0 +1,568 @@
+.footer {
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+.footer-app-section {
+    background-color: #2d3941;
+    color: white;
+    padding: 70px 0;
+}
+
+.footer-app-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.app-info {
+    flex: 1;
+    min-width: 280px;
+}
+
+.app-info h2 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.app-info p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.app-qr {
+    flex: 0 0 180px;
+}
+
+.qr-code-placeholder {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: white;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+.qr-code-placeholder:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.qr-code-placeholder i {
+    font-size: 100px;
+    color: #2d3941;
+}
+
+.learn-more-btn {
+    background-color: #e83a3a;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(232, 58, 58, 0.3);
+}
+
+.learn-more-btn:hover {
+    background-color: #d32f2f;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(232, 58, 58, 0.4);
+}
+
+.learn-more-btn:active {
+    transform: translateY(0);
+}
+
+.footer-membership-section {
+    padding: 90px 0;
+}
+
+.membership-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.membership-image {
+    flex: 0 0 45%;
+    min-width: 280px;
+}
+
+.membership-image-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: #2d3941;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.membership-image-placeholder:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.membership-image-placeholder::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(45, 57, 65, 0.5) 0%, #2d3941 80%);
+    z-index: 1;
+}
+
+.membership-image-placeholder i {
+    font-size: 100px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.membership-image-placeholder:hover i {
+    transform: scale(1.1);
+}
+
+.membership-image-placeholder span {
+    font-size: 24px;
+    font-weight: 300;
+    position: relative;
+    z-index: 2;
+}
+
+.membership-info {
+    flex: 1;
+    min-width: 280px;
+}
+
+.membership-logo {
+    margin-bottom: 30px;
+}
+
+.ihg-rewards-logo {
+    display: flex;
+    align-items: center;
+}
+
+.ihg-rewards-logo .ihg-text {
+    font-size: 32px;
+    font-weight: 700;
+    color: #e83a3a;
+    margin-right: 14px;
+}
+
+.ihg-rewards-logo .one-rewards-text {
+    font-size: 26px;
+    font-weight: 300;
+    color: #333;
+}
+
+.membership-info h2 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    color: #2d3941;
+}
+
+.membership-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 35px;
+}
+
+.membership-benefits li {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 35px;
+    font-size: 18px;
+    color: #444;
+    transition: transform 0.2s ease;
+}
+
+.membership-benefits li:hover {
+    transform: translateX(5px);
+}
+
+.membership-benefits li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #e83a3a;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.join-free-btn {
+    background-color: #e83a3a;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(232, 58, 58, 0.3);
+}
+
+.join-free-btn:hover {
+    background-color: #d32f2f;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(232, 58, 58, 0.4);
+}
+
+.join-free-btn:active {
+    transform: translateY(0);
+}
+
+.already-member {
+    color: #2d3941;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.already-member:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #e83a3a;
+    transition: width 0.2s ease;
+}
+
+.already-member:hover {
+    color: #e83a3a;
+}
+
+.already-member:hover:after {
+    width: 100%;
+}
+
+.footer-main {
+    background-color: #f8f9fa;
+    padding: 90px 0;
+    border-top: 1px solid #e9ecef;
+}
+
+.footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.footer-message {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 70px;
+}
+
+.footer-message h2 {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #2d3941;
+}
+
+.footer-message p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.footer-links-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 70px;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-links-column {
+    flex: 1;
+    min-width: 200px;
+    padding: 0 15px;
+}
+
+.footer-links-column h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    color: #2d3941;
+    gap: 10px;
+}
+
+.footer-links-column h3 i {
+    color: #e83a3a;
+}
+
+.footer-links-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links-column li {
+    margin-bottom: 15px;
+}
+
+.footer-links-column a {
+    color: #555;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    position: relative;
+    padding-bottom: 3px;
+    display: inline-block;
+}
+
+.footer-links-column a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #e83a3a;
+    transition: width 0.2s ease;
+}
+
+.footer-links-column a:hover {
+    color: #e83a3a;
+    transform: translateX(3px);
+}
+
+.footer-links-column a:hover:after {
+    width: 100%;
+}
+
+.footer-brands {
+    margin-top: 70px;
+}
+
+.brand-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.brand-logo {
+    height: 50px;
+    width: 130px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.brand-logo:hover {
+    transform: translateY(-5px) rotate(2deg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.brand-logo i {
+    font-size: 26px;
+    color: #444;
+    transition: color 0.2s ease;
+}
+
+.brand-logo:hover i {
+    color: #e83a3a;
+}
+
+.footer-bottom {
+    padding: 50px 0;
+    border-top: 1px solid #e9ecef;
+}
+
+.footer-legal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.ihg-footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ihg-footer-logo .ihg-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e83a3a;
+    line-height: 1;
+}
+
+.ihg-footer-logo .hotels-text {
+    font-size: 14px;
+    color: #555;
+}
+
+.footer-social {
+    display: flex;
+    gap: 18px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #f1f1f1;
+    color: #555;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: #e83a3a;
+    color: white;
+    transform: translateY(-5px);
+}
+
+.footer-legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    font-size: 16px;
+}
+
+.footer-legal-links a {
+    color: #555;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.footer-legal-links a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #e83a3a;
+    transition: width 0.2s ease;
+}
+
+.footer-legal-links a:hover {
+    color: #e83a3a;
+}
+
+.footer-legal-links a:hover:after {
+    width: 100%;
+}
+
+.copyright {
+    margin: 0;
+    color: #777;
+    font-size: 15px;
+}
+
+/* Icons */
+.icon-mobile-app:before {
+    content: '\f3cd';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-qrcode:before {
+    content: '\f029';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-swimming-pool:before {
+    content: '\f5c5';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-user-plus:before {
+    content: '\f234';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-usa:before {
+    content: '\f74d';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-world-map:before {
+    content: '\f57d';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-plane:before {
+    content: '\f072';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-hotel-brand:before {
+    content: '\f1ad';
+    font-family: 'Font Awesome 5 Free';
+}
+
+.icon-facebook:before {
+    content: '\f39e';
+    font-family: 'Font Awesome 5 Brands';
+}
+
+.icon-twitter:before {
+    content: '\f099';
+    font-family: 'Font Awesome 5 Brands';
+}
+
+.icon-instagram:before {
+    content: '\f16d';
+    font-family: 'Font Awesome 5 Brands';
+}
