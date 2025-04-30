@@ -126,39 +126,24 @@ export const executeRecaptcha = async (siteKey: string, action: string): Promise
  * @param recaptchaSiteKey Your reCAPTCHA site key
  * @returns Promise resolving to booking result
  */
-export const processBookingWithBotDetection = async (
-    _: any,
-    recaptchaSiteKey: string
-): Promise<{ success: boolean; message: string }> => {
+export const processBookingWithBotDetection = async (_: any): Promise<{ success: boolean; message: string }> => {
     // First check if a bot was detected via honeytraps
-    if (botDetected) {
-        return {
-            success: false,
-            message: 'We were unable to process your request due to security concerns.',
-        };
-    }
-
-    try {
-        // Execute reCAPTCHA v3 verification
-        await executeRecaptcha(recaptchaSiteKey, 'booking');
-
-        // In a real application, you would send this token to your backend
-        // for verification, along with the form data
-
-        // If we get here successfully, mark the user as human
-        markHumanVerified();
-
-        // For demo purposes, we'll simulate a successful booking
-        return {
-            success: true,
-            message: 'Booking successful! Thank you for choosing IHG.',
-        };
-    } catch (error) {
-        console.error('reCAPTCHA verification failed:', error);
-        return {
-            success: false,
-            message: 'We were unable to verify your request. Please try again later.',
-        };
+    switch (userTrustLevel) {
+        case TrustLevel.BOT:
+            return {
+                success: false,
+                message: 'We were unable to process your request due to security concerns.',
+            };
+        case TrustLevel.HUMAN:
+            return {
+                success: true,
+                message: 'Booking successful! Thank you for choosing IHG.',
+            };
+        default:
+            return {
+                success: false,
+                message: 'We were unable to verify your request. Please try again later.',
+            };
     }
 };
 

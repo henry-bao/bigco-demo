@@ -14,18 +14,31 @@ function App() {
     const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [showCaptcha, setShowCaptcha] = useState(false);
+    const [captchaTriggeredBySearch, setCaptchaTriggeredBySearch] = useState(false);
 
-    // Check for bot detection
+    // Check for bot detection - Remove automatic captcha display logic
     useEffect(() => {
+        // This effect can potentially be removed or simplified if its only purpose
+        // was to automatically show CAPTCHA on bot detection.
+        // For now, let's keep it but comment out the CAPTCHA logic.
+        /*
         const checkBotStatus = () => {
             // If bot is detected, reset captcha verification status
             if (isBotDetected()) {
                 setIsCaptchaVerified(false);
 
                 // Only show CAPTCHA if bot is detected and user isn't logged into Google
-                if (!isLoggedInToGoogle) {
-                    setShowCaptcha(true);
-                }
+                // And captcha wasn't explicitly triggered by search
+                // --- THIS LOGIC IS REMOVED --- 
+                // if (!isLoggedInToGoogle && !captchaTriggeredBySearch) {
+                //     setShowCaptcha(true);
+                // }
+            } else {
+                 // If bot not detected anymore, hide captcha unless triggered by search
+                 // --- THIS LOGIC IS REMOVED --- 
+                 // if (!captchaTriggeredBySearch) {
+                 //    setShowCaptcha(false);
+                 // }
             }
         };
 
@@ -33,7 +46,8 @@ function App() {
         const intervalId = setInterval(checkBotStatus, 2000);
 
         return () => clearInterval(intervalId);
-    }, [isLoggedInToGoogle]);
+        */
+    }, [isLoggedInToGoogle]); // Remove captchaTriggeredBySearch dependency
 
     const handleLoginStatusChange = (status: boolean) => {
         setIsLoggedInToGoogle(status);
@@ -47,17 +61,29 @@ function App() {
 
     const handleCaptchaVerified = () => {
         setIsCaptchaVerified(true);
-        setShowCaptcha(false);
-
-        // Reset bot detection after successful CAPTCHA
-        resetBotDetection();
+        // setShowCaptcha(false); // No longer needed as shouldShowCaptchaOverlay controls it
+        setCaptchaTriggeredBySearch(false); // Reset search trigger
 
         // Mark as human after successful CAPTCHA
+        // We should mark as human here, assuming CAPTCHA pass means human
         markHumanVerified();
+
+        // Optionally: Reset bot detection state if desired after CAPTCHA pass
+        // resetBotDetection();
     };
 
-    // Only show content if loading or authenticated (Google login or silent bot checks passed)
-    const showContent = isLoading || isLoggedInToGoogle || isCaptchaVerified || !showCaptcha;
+    const handleRequireCaptcha = () => {
+        console.log('Captcha required by SearchBar');
+        setIsCaptchaVerified(false); // Ensure captcha state is false before showing
+        setCaptchaTriggeredBySearch(true);
+        // setShowCaptcha(true); // No longer needed directly
+    };
+
+    // Determine if CAPTCHA overlay should be shown - ONLY when triggered by search
+    const shouldShowCaptchaOverlay = captchaTriggeredBySearch;
+
+    // Only show content if loading or authenticated (Google login or CAPTCHA verified)
+    const showContent = !isLoading && (isLoggedInToGoogle || isCaptchaVerified);
 
     return (
         <div className="App">
@@ -65,7 +91,7 @@ function App() {
             <GoogleLoginCheck onLoginStatusChange={handleLoginStatusChange} />
 
             {/* Show captcha only if bot activity is detected or explicitly shown */}
-            {showCaptcha && (
+            {shouldShowCaptchaOverlay && (
                 <div className="captcha-overlay">
                     <div className="captcha-container">
                         <div className="ihg-captcha-header">
@@ -79,15 +105,15 @@ function App() {
                 </div>
             )}
 
-            {/* Loading state */}
+            {/* Simple loading state for regular version */}
             {isLoading && (
                 <div className="loading-overlay">
-                    <div className="loading-container">
+                    <div className="simple-loading-container">
                         <div className="ihg-logo loading-logo">
                             <span className="ihg-text">IHG</span>
                             <span className="hotels-text">Hotels & Resorts</span>
                         </div>
-                        <p>Checking your session...</p>
+                        <p>Loading...</p>
                         <div className="loading-spinner">
                             <i className="fas fa-spinner fa-spin"></i>
                         </div>
@@ -96,9 +122,9 @@ function App() {
             )}
 
             {/* Main content - visible based on authentication status */}
-            <div className={`main-content ${showContent ? '' : 'hidden'}`}>
+            <div className={`main-content ${!isLoading ? '' : 'hidden'}`}>
                 <Header />
-                <SearchBar />
+                <SearchBar onRequireCaptcha={handleRequireCaptcha} />
                 <Hero />
                 <BrandsSection />
                 <Footer />

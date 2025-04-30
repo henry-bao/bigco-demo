@@ -33,7 +33,7 @@ const Header: React.FC = () => {
             <div className="main-nav">
                 <div className="container">
                     <div className="logo">
-                        <a href="#">
+                        <a href="/">
                             <div className="ihg-logo">
                                 <span className="ihg-text">IHG</span>
                                 <span className="hotels-text">Hotels & Resorts</span>
@@ -59,6 +59,9 @@ const Header: React.FC = () => {
                             </a>
                             <a href="#" className="nav-item">
                                 <i className="icon-rewards"></i> IHG One Rewards
+                            </a>
+                            <a href="/demo" className="nav-item security-demo">
+                                <i className="icon-shield-alt"></i> Security Demo
                             </a>
                         </ul>
                     </nav>

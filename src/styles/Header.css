@@ -211,3 +211,26 @@
 .icon-rewards:before {
     content: '\f005';
 }
+
+.icon-shield-alt:before {
+    content: '\f3ed';
+}
+
+.security-demo {
+    background-color: #f8f9fa;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+}
+
+.security-demo:hover {
+    background-color: #e2e6ea;
+    color: #e83a3a;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.security-demo:after {
+    display: none;
+}

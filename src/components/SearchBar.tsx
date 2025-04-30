@@ -5,13 +5,11 @@ import TrustLevelIndicator from './TrustLevelIndicator';
 import {
     processBookingWithBotDetection,
     isBotDetected as checkBotDetected,
-    resetBotDetection,
     getUserTrustLevel,
     TrustLevel,
 } from '../utils/botDetection';
 
 // reCAPTCHA site key - in a real app, this would come from environment variables
-const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'; // Google's test key
 
 interface FormData {
     destination: string;
@@ -21,7 +19,12 @@ interface FormData {
     rateCode: string;
 }
 
-const SearchBar: React.FC = () => {
+interface SearchBarProps {
+    isDemoModeEnabled?: boolean;
+    onRequireCaptcha?: () => void;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ isDemoModeEnabled = false, onRequireCaptcha }) => {
     const [formData, setFormData] = useState<FormData>({
         destination: '',
         checkIn: '',
@@ -32,7 +35,6 @@ const SearchBar: React.FC = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState<{ text: string; isError: boolean } | null>(null);
-    const [isDemoMode, setIsDemoMode] = useState(false);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { id, name, value } = e.target;
@@ -49,9 +51,20 @@ const SearchBar: React.FC = () => {
         setIsLoading(true);
         setMessage(null);
 
+        const trustLevel = getUserTrustLevel();
+
+        // If trust level is UNKNOWN, trigger CAPTCHA instead of processing
+        if (trustLevel === TrustLevel.UNKNOWN && onRequireCaptcha) {
+            console.log('Trust level unknown, requiring CAPTCHA verification.');
+            onRequireCaptcha();
+            setIsLoading(false);
+            return; // Stop processing here until CAPTCHA is verified
+        }
+
+        // If trust level is BOT or HUMAN, proceed with booking attempt
         try {
-            // Process booking with bot detection
-            const result = await processBookingWithBotDetection(formData, RECAPTCHA_SITE_KEY);
+            // Process booking with bot detection (handles BOT and HUMAN cases)
+            const result = await processBookingWithBotDetection(formData);
 
             setIsLoading(false);
             setMessage({
@@ -73,43 +86,28 @@ const SearchBar: React.FC = () => {
         }
     };
 
-    const toggleDemoMode = () => {
-        // Always reset bot detection when toggling demo mode
-        resetBotDetection(false);
-        setIsDemoMode(!isDemoMode);
-    };
-
     return (
         <div className="search-bar-container">
             <div className="search-bar">
-                {/* Demo mode toggle */}
-                {/* {getUserTrustLevel() !== TrustLevel.HUMAN && ( */}
-                <div className="demo-mode-toggle">
-                    <button
-                        type="button"
-                        className={`demo-toggle-btn ${isDemoMode ? 'active' : ''}`}
-                        onClick={toggleDemoMode}
-                    >
-                        {isDemoMode ? 'Hide Security Demo' : 'Show Security Demo'}
-                    </button>
-                    {isDemoMode && getUserTrustLevel() !== TrustLevel.HUMAN && (
+                {/* Demo mode explanation - only in demo mode */}
+                {isDemoModeEnabled && (
+                    <div className="demo-mode-toggle">
                         <div className="demo-explanation">
                             <p>
-                                <strong>Bot Detection Demo Mode:</strong> Honeytraps are normally invisible elements
-                                that only bots interact with. They're shown in red for demonstration purposes.
-                                Interacting with them in normal mode would mark you as a bot.
+                                <strong>Security Demo Mode:</strong> This page demonstrates the security features
+                                including animated session verification and honeytrap elements (shown in red) that help
+                                detect automated bots.
                             </p>
                         </div>
-                    )}
-                </div>
-                {/* )} */}
+                    </div>
+                )}
 
                 {/* Trust level indicator (only shown in demo mode) */}
-                <TrustLevelIndicator isDemoMode={isDemoMode} />
+                {isDemoModeEnabled && <TrustLevelIndicator isDemoMode={true} />}
 
-                {/* Include honeytrap elements */}
-                {getUserTrustLevel() !== TrustLevel.HUMAN && (
-                    <HoneytrapElements className="search-form-honeytrap" isDemoMode={isDemoMode} />
+                {/* Include honeytrap elements (only in demo mode) */}
+                {isDemoModeEnabled && getUserTrustLevel() !== TrustLevel.HUMAN && (
+                    <HoneytrapElements className="search-form-honeytrap" isDemoMode={true} />
                 )}
 
                 <form className="search-form" onSubmit={handleSubmit}>
@@ -187,7 +185,7 @@ const SearchBar: React.FC = () => {
                         <button
                             type="submit"
                             className="search-btn"
-                            disabled={isLoading || (checkBotDetected() && !isDemoMode)}
+                            disabled={isLoading || (checkBotDetected() && !isDemoModeEnabled)}
                         >
                             {isLoading ? (
                                 <span className="loading-spinner">
