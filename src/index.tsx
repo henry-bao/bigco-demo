@@ -13,7 +13,7 @@ root.render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<App />} />
-                <Route path="/social-login-demo" element={<SocialLoginDemo />} />
+                <Route path="/google" element={<SocialLoginDemo />} />
                 <Route path="/demo" element={<DemoMode />} />
             </Routes>
         </BrowserRouter>

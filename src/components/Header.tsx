@@ -1,7 +1,11 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import '../styles/Header.css';
 
 const Header: React.FC = () => {
+    const location = useLocation();
+    const isDemoRoute = location.pathname === '/demo';
+
     return (
         <header className="ihg-header">
             <div className="top-nav">
@@ -60,8 +64,8 @@ const Header: React.FC = () => {
                             <a href="#" className="nav-item">
                                 <i className="icon-rewards"></i> IHG One Rewards
                             </a>
-                            <a href="/demo" className="nav-item security-demo">
-                                <i className="icon-shield-alt"></i> Security Demo
+                            <a href={isDemoRoute ? '/' : '/demo'} className={`nav-item security-demo`}>
+                                <i className="icon-shield-alt"></i> {isDemoRoute ? 'Normal Mode' : 'Demo Mode'}
                             </a>
                         </ul>
                     </nav>
