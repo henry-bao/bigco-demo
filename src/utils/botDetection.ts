@@ -162,7 +162,7 @@ export const processBookingWithBotDetection = async (
     }
 };
 
-export default {
+export const botDetectionUtils = {
     selectRandomHoneytrap,
     getSelectedHoneytrap,
     markBotInteraction,

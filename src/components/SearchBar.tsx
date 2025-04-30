@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../styles/SearchBar.css';
 import HoneytrapElements from './HoneytrapElements';
 import TrustLevelIndicator from './TrustLevelIndicator';
 import {
-    initRecaptcha,
     processBookingWithBotDetection,
     isBotDetected as checkBotDetected,
     resetBotDetection,
@@ -34,13 +33,6 @@ const SearchBar: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState<{ text: string; isError: boolean } | null>(null);
     const [isDemoMode, setIsDemoMode] = useState(false);
-
-    // Initialize reCAPTCHA on component mount
-    useEffect(() => {
-        initRecaptcha(RECAPTCHA_SITE_KEY).catch((err) => {
-            console.error('Failed to initialize reCAPTCHA:', err);
-        });
-    }, []);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { id, name, value } = e.target;

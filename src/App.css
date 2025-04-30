@@ -147,6 +147,10 @@ body {
     animation: fadeInUp 0.5s ease-out;
 }
 
+.ihg-captcha-header .hotels-text {
+    color: white;
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
